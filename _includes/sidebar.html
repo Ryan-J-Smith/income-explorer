@@ -1,0 +1,22 @@
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="{{ site.baseurl }}">
+          {{ site.title }}
+        </a>
+      </h1>
+      <p class="lead">{{ site.description }}</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
+      <a class="sidebar-nav-item{% if page.url == "/maps/" %} active{% endif %}" href="{{ site.baseurl }}maps/">Maps</a>
+      <a class="sidebar-nav-item{% if page.url == "/code/" %} active{% endif %}" href="{{ site.baseurl }}code/">Code</a>
+      <a class="sidebar-nav-item{% if page.url == "/resources/" %} active{% endif %}" href="{{ site.baseurl }}resources/">Other Resources</a>
+      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub Repo</a>
+    </nav>
+
+    <p>&copy; Ryan J. Smith {{ site.time | date: '%Y' }}. All rights reserved.</p>
+  </div>
+</div>

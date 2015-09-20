@@ -1,0 +1,59 @@
+---
+layout: default
+title: Maps
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="{{ site.baseurl }}public/css/jquery-ui.css">
+    <style>
+        body {
+            width: 80%;
+            margin-left: 10%;
+        }
+        .cc.active {
+            fill: "red";
+        }
+
+        path {
+            stroke: "red";
+        }
+    </style>
+
+
+    <script type="text/javascript" src="{{ site.baseurl }}public/js/d3.min.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}public/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}public/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}public/js/queue.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script> -->
+
+    <title>Income Map</title>
+
+    </head>
+
+    <body>
+
+        <div id="main-container">
+
+            <p>
+              <label for="amount"><strong>Annual Household Income:</strong></label>
+              <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            </p>
+
+            <div id="income-range" style="width: 800px;"></div>
+            <p><h4><strong>Percentage of households with annual income within the range you selected:</strong></h4></p>
+
+            <div id="map"></div>
+
+            <p class="credit">SOURCE: US Census Data, 5-year American Community Survey 2013</p>
+
+        </div>
+
+
+    <script src="{{ site.baseurl }}public/js/draw-map.js"></script>
+    </body>
+
+</html>

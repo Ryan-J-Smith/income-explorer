@@ -1,0 +1,26 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Income Explorer
+tagline:          'Baltimore Hackathon 2015'
+description:      'Interactive maps to better understand the relationship between income and geography'
+url:              http://Ryan-J-Smith.github.io/income-explorer/
+baseurl:          /income-explorer/
+
+author:
+  name:           'Ryan J. Smith'
+  url:            https://twitter.com/Ryan_J_Smith
+
+paginate:         5
+
+# Custom vars
+version:          
+
+github:
+  repo:           https://github.com/Ryan-J-Smith/income-explorer
