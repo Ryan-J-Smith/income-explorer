@@ -35,25 +35,29 @@ title: Maps
     </head>
 
     <body>
+    <div id="main-container">
 
-        <div id="main-container">
+        <h3>Select a region and adjust income with slider:</h3>
+        <select id="regions" onchange=makeMap()></script>>
+          <option value="balt">Baltimore City</option>
+          <option value="greater_balt">Baltimore City and County</option>
+          <option value="maryland">Maryland</option>
+        </select>
+        <hr>
+          <label for="amount"><strong>Annual Household Income:</strong></label>
+          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
-            <p>
-              <label for="amount"><strong>Annual Household Income:</strong></label>
-              <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-            </p>
+            <div id="income-range" style="width: 700px;"></div>
+        <p><h4><strong>Percent households with annual income within the range you selected:</strong></h4></p>
 
-            <div id="income-range" style="width: 800px;"></div>
-            <p><h4><strong>Percentage of households with annual income within the range you selected:</strong></h4></p>
+        <div id="map"></div>
 
-            <div id="map"></div>
+        <p class="credit">SOURCE: US Census Data, 5-year American Community Survey 2013</p>
 
-            <p class="credit">SOURCE: US Census Data, 5-year American Community Survey 2013</p>
-
-        </div>
+    </div>
 
 
-    <script src="{{ site.baseurl }}public/js/draw-map.js"></script>
+    <script src="{{ site.baseurl }}public/js/draw-map-new.js"></script>
     </body>
 
 </html>

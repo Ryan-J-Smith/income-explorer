@@ -1,19 +1,20 @@
 // https://www.washingtonpost.com/graphics/business/temperatures/states.js
 
 // var width = parseInt($('body').width())
-var width = 900
+var width = 700
 var mapRatio = 0.75;
 var height = width * mapRatio;
 var embiggen = 1.00;
 
-var mapVOffset = 25
+var mapVOffset = 0.05
 var mapHeight = height - mapVOffset
 
 var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var region = "maryland"
+// var region = document.getElementById("regions")
+var region = document.getElementById("regions").value
 
 var census_file = "../data/" + region + "_census_data.csv";
 var shape_file = "../data/" + region + "_geo_data.json";
@@ -42,11 +43,28 @@ function isBigEnough(value) {
   return value > 0;
 }
 
-queue()
-    .defer(d3.json, shape_file)
-    .defer(d3.csv, census_file)
-    .await(ready);
+function makeMap() {
+    svg.remove();
 
+    svg = d3.select("#map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    var region = document.getElementById("regions").value
+
+    var census_file = "../data/" + region + "_census_data.csv";
+    var shape_file = "../data/" + region + "_geo_data.json";
+
+    queue()
+        .defer(d3.json, shape_file)
+        .defer(d3.csv, census_file)
+        .await(ready);
+}
+
+    queue()
+        .defer(d3.json, shape_file)
+        .defer(d3.csv, census_file)
+        .await(ready);
 
 function ready(error, shapes, csvData) {
     if (error) throw error;
@@ -65,7 +83,7 @@ function ready(error, shapes, csvData) {
     // Compute the bounds of a feature of interest, then derive scale & translate.
     var b = path.bounds(shapes),
     s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / mapHeight),
-    t = [(width - s * (b[1][0] + b[0][0])) / 2, mapVOffset + (mapHeight - s * (b[1][1] + b[0][1])) / 2];
+    t = [(width - s * (b[1][0] + b[0][0])) / 2, mapVOffset*mapHeight + (mapHeight - s * (b[1][1] + b[0][1])) / 2];
 
     // Update the projection to use computed scale & translate.
     projection
@@ -93,13 +111,45 @@ function ready(error, shapes, csvData) {
             var blockGroup = d3.select(this);
             blockGroup.classed('active', false);
         })
-        .attr("vector-effect", "non-scaling-stroke")
+        .attr("vector-effect", "non-scaling-stroke");
         // .style("stroke", function(d) {
         //     if (dataMap.get(d.id) == 0 || isNaN(dataMap.get(d.id))) {
         //         return "#eee";
         //     }         
         //     return "black";
         // });
+    
+    // Start Legend -----------------------
+  
+
+      svg.selectAll("rect")
+        .data(cs)
+        .enter()
+        .append("rect")
+        .attr("x", function(d,i){
+          return 50 + (i * 50);
+        })
+        .attr("y", 10)
+        .attr("width", 50)
+        .attr("height", 10)
+        .attr("fill", function(d) {return d})
+
+      svg.append("text")
+        .attr("id", "leftlabel")
+        .style({"font-size":"18px","font-weight":"bold", "fill":"#333", "text-anchor": "end"})
+        .attr("x", 40)
+        .attr("y", 20)
+        .text("0%"); 
+
+      svg.append("text")
+        .attr("id", "rightlabel")
+        .style({"font-size":"18px","font-weight":"bold", "fill":"#333"})
+        .attr("x", 510)
+        .attr("y", 20)
+        .text("100%"); 
+
+// End legend -----------------------
+
 }
 
 // Slider ---------------------------
@@ -239,33 +289,4 @@ function loadCSVData(csvData) {
     q.domain([0, 1]); // adjust domain of quantiles
 };
 
-// Start Legend -----------------------
-  
 
-  svg.selectAll("rect")
-    .data(cs)
-    .enter()
-    .append("rect")
-    .attr("x", function(d,i){
-      return 50 + (i * 50);
-    })
-    .attr("y", 10)
-    .attr("width", 50)
-    .attr("height", 10)
-    .attr("fill", function(d) {return d})
-
-  svg.append("text")
-    .attr("id", "leftlabel")
-    .style({"font-size":"18px","font-weight":"bold", "fill":"#333", "text-anchor": "end"})
-    .attr("x", 40)
-    .attr("y", 20)
-    .text("0%"); 
-
-  svg.append("text")
-    .attr("id", "rightlabel")
-    .style({"font-size":"18px","font-weight":"bold", "fill":"#333"})
-    .attr("x", 510)
-    .attr("y", 20)
-    .text("100%"); 
-
-// End legend -----------------------
