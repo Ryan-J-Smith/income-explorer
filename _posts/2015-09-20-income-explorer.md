@@ -5,17 +5,19 @@ title: Income Explorer
 
 **The goal of this project was to create interactive web maps for investigating the relationship between household income and geography.**  Particularly I wanted to do this in a reproducible manner to make it easily extensible to many regions and spatial scales.
 
-### This projects consists of two significant components:
+## This projects consists of two significant components:
 
-#### 1. Getting and cleaning data
+### 1. Getting and cleaning data
 
 Making a good map is dependent upon finding useful geographic shapes and corresponding attributes.  The US Census provides an excellent source of data in this regard, but the vast amount of data presents a challenge to those wishing to use it.  
 
 The first challenge of my project required programmatically accessing, filtering, and cleaning data and geographic shape files from the US Census website. A summary of the procedures used to gather and process this data can be found in the [code]({{ site.baseurl }}code/) section.
 
+The github repo also contains [complete iPython Notebooks](https://github.com/Ryan-J-Smith/income-explorer/blob/gh-pages/notebooks/MainFile-Tracts.ipynb) detailing this process.
+
 **Tools used:** Python, [pandas](http://pandas.pydata.org/), [geopandas](http://geopandas.org/), [Sunlight Labs Census API](https://github.com/sunlightlabs/census)
 
-#### 2. Visualizing data as an interactive map
+### 2. Visualizing data as an interactive map
 
 Income and other demographic attributes are commonly mapped for a number of different purposes.  However, these maps are often static and rely on a single summary statistic when a detailed distribution of the data is often available.
 
