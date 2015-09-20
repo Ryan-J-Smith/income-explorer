@@ -3,9 +3,9 @@ layout: page
 title: Code
 ---
 
-Code for acquiring and cleaning data
+Here I will go over my basic code for acquiring data for this project. The following are largely excerpted from [iPython Notebooks](https://github.com/Ryan-J-Smith/income-explorer/tree/gh-pages/notebooks) I created for this project
 
-Here I will go over my basic code for acquiring data for this project:
+### Initial declarations and imports
 
 {% highlight python %}
 import os.path
@@ -89,7 +89,7 @@ if r.status_code == requests.codes.ok:
 
 ### Pruning Shape Data
 
-The trouble is that TIGER data comes packaged at the state level, so there are a lot of shapes we don't actually need.
+The trouble is that TIGER data comes packaged at the state level, so there are a lot of shapes we don't actually need.  Here I am trimming down the GeoDataFrame to match the attributes acquired from the census data.
 
 {% highlight python %}
 # Unzip file, extract contents
@@ -105,7 +105,7 @@ shapes = shapes[shapes["COUNTYFP"].isin(county_list)]
 
 ### Exporting Shape Data for the Web
 
-Even though we have eliminated many of the shapes we don't need, the shape data still has additional attributes that are not necessary for the map.
+Even though we have eliminated many of the shapes we don't need, the shape data still has additional attributes that are not necessary for the map.  In this section I remove everything except the geometry and the unique identifier (fips).  I also apply a polygon simplification step to reduce the overall number of points used.  This can make a significant impact in final file size for larger areas.
 
 {% highlight python %}
 small_shapes = gpd.GeoDataFrame()
